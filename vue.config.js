@@ -18,5 +18,6 @@ module.exports = {
         'views': '@/views',
       }
     }
-  }
+  },
+  publicPath: './'
 }

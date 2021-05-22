@@ -2,17 +2,21 @@
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
     
+    <tab-control :titles="['流行','新款','精选']"
+                  @tabClick="tabClick"
+                  ref="tabControl1"
+                  v-show="isTabFixed"/>
     <scroll class="content" ref="scroll" 
     :probe-type="3"  
     :pull-up-load="true" 
     @scroll="contentScroll" 
     @pullingUp="loadMore">
-      <home-swiper :banners="banners"/>
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"/>
         <recommend-view :recommends="recommends"/>
         <feature-View/>
-        <tab-control class="tab-control" 
-                    :titles="['流行','新款','精选']"
-                     @tabClick="tabClick"/>
+        <tab-control :titles="['流行','新款','精选']"
+                     @tabClick="tabClick"
+                     ref="tabControl2"/>
         <goods-list :goods="showGoods"/>
     </scroll>
 
@@ -60,7 +64,10 @@ export default {
         'sell': {page: 0, list: []},
       },
       currentType: 'pop',
-      isShowBackTop: false
+      isShowBackTop: false,
+      tabOffsetTop: 0,
+      isTabFixed: false,
+
     }
   },
   created(){
@@ -75,9 +82,16 @@ export default {
       return this.goods[this.currentType].list
     }
   },
+  mounted(){
+    
+  },
   methods:{
     contentScroll(position) {
+      // 1、判断BackTop是否显示
       this.isShowBackTop = (-position.y) > 1000;
+
+      // 2、决定tabControl是否吸顶
+      this.isTabFixed = (-position.y) > this.tabOffsetTop ;
     },
     loadMore() {
       console.log('上拉加载更多');
@@ -116,44 +130,57 @@ export default {
           this.currentType = 'sell'
           break;
       }
+      this.$refs.tabControl1.currentIndex = index
+      this.$refs.tabControl2.currentIndex = index
     },
     backClick() {
-      this.$refs.scroll.scrollTo(0, 0, 1000)
+      this.$refs.scroll.scrollTo(0, 0, 700)
+    },
+    swiperImageLoad(){
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
+      console.log(this.tabOffsetTop);
     }
   }
 }
 </script>
 
 <style scoped>
-  /* #home {
-    padding-top: 44px;
-  } */
+  #home {
+    height: 100vh;
+    /* position: relative; */
+  }
   .home-nav{
     background-color: var(--color-tint);
     color: white;
 
-    position: sticky;
+    /* (比较好的方案)使用原生滚动时，为了不让导航跟随一起滚动 */
+    /* position: sticky;
     position: -webkit-sticky;
     top: 0;
-    z-index: 9; 
+    z-index: 9;  */
 
-    /* 老师的不完善解决方案
+    /* （老师的不完善解决方案）
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     */
   }
+ 
   .tab-control {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 44px;
+    position: relative;
     z-index: 9;
   }
 
   .content {
     height: calc(100vh - 93px);
     overflow: hidden;
+
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
   }
 
 </style>
