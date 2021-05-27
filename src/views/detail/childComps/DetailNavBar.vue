@@ -1,8 +1,9 @@
 <template>
   <div>
     <nav-bar>
-      <div slot="left" class="back" @click="backClick">
-        <img src="~assets/img/common/back.svg" alt="">
+      <div class="back" slot="left" @click="backClick">
+        <!-- <img src="../../../assets/img/common/back.png"> -->
+        <
       </div>
       <div class="title" slot="center">
         <div v-for="(item,index) in titles"
@@ -17,6 +18,7 @@
 
 <script>
 import NavBar from '@/components/common/navbar/NavBar'
+
 export default {
   name: "DetailNavBar",
   components: {
@@ -25,7 +27,7 @@ export default {
   data() {
     return {
       titles: ['商品', '参数', '评论', '推荐'],
-      currentIndex: 0
+      currentIndex: 0,
     }
   },
   methods: {
@@ -52,6 +54,10 @@ export default {
     color: var(--color-high-text);
   }
   .back {
-    margin-top: 5px;
+
+    display: flex;
+    justify-content:center;
+    font-size: 30px;
   }
+
 </style>

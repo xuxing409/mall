@@ -1,6 +1,6 @@
 <template>
   <div id="detail">
-     <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="titlenavbar"/>
+    <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="titlenavbar"/>
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
       <detail-swiper :topImages="topImages"></detail-swiper>
       <detail-base-info :goods="goods"/>
