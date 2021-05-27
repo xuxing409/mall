@@ -1,6 +1,6 @@
 <template>
   <div class="back-top">
-    <img src="~assets/img/common/top.png" alt="">
+    <img src="~assets/img/common/back-top.svg" alt="">
   </div>
 </template>
 
@@ -22,5 +22,7 @@ export default {
   .back-top img {
     width: 43px;
     height:  43px;
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: 50%;
   }
 </style>

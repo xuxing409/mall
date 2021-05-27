@@ -2,8 +2,7 @@
   <div>
     <nav-bar>
       <div class="back" slot="left" @click="backClick">
-        <!-- <img src="../../../assets/img/common/back.png"> -->
-        <
+        <img src="@/assets/img/common/back.svg">
       </div>
       <div class="title" slot="center">
         <div v-for="(item,index) in titles"
@@ -54,8 +53,9 @@ export default {
     color: var(--color-high-text);
   }
   .back {
-
+    margin-top: 8px;
     display: flex;
+    align-items: center;
     justify-content:center;
     font-size: 30px;
   }
