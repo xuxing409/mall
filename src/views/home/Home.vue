@@ -118,7 +118,6 @@ export default {
      )
     },
     tabClick(index){
-      console.log(index);
       switch(index) {
         case 0: 
           this.currentType = 'pop';
@@ -138,7 +137,6 @@ export default {
     },
     swiperImageLoad(){
       this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
-      console.log(this.tabOffsetTop);
     }
   }
 }

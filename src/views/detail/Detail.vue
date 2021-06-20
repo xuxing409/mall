@@ -73,7 +73,6 @@ export default {
     async getDetail(iid){
       // 1.根据iid请求数据
       const res =  await getDetail(this.iid)
-      console.log(res);
       const data = res.result;
       // 2.获取顶部信息
       this.topImages = data.itemInfo.topImages
@@ -136,7 +135,6 @@ export default {
     },
     // tabBar顶栏点击
     titleClick(index){
-      console.log(index);
       // 图片没加载完时，保存点击的哪个tarbar，图片加载完毕后，再跳转到那个位置
       if(this.isTitleClick === false){
         switch(index){
@@ -195,16 +193,12 @@ export default {
       // })   
     },
     imgload(){
-      console.log('imgload');
       
       this.isLoad = true;
-      console.log(this.isTitleClick);
 
       if(this.isTitleClick === true){
-        console.log(this.tabBarRef);
         this.$refs.scroll.refresh()
         this.$refs.scroll.scroll.scrollToElement(this.tabBarRef.$el, 1000, 0, 0)
-        console.log('isTitleClick');
       }
     },
     backClick() {
@@ -227,7 +221,6 @@ export default {
 
       // mapActions方式
        this.addCart(product).then(res => {
-        console.log(res);
 
         this.$toast.show(res)
       })

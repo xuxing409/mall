@@ -31,7 +31,11 @@ export default {
   },
   methods: {
     itemclick(){
-      this.$router.replace(this.path)
+      // this.$router.replace(this.path)
+      // 解决重复点同一个路由，控制台报错的问题
+      if( this.path != this.$route.path){
+        this.$router.replace(this.path);
+      }
     }
   }
 }

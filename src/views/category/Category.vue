@@ -53,7 +53,6 @@ export default {
       const {data:res} = await getCategory();
       this.categoryList = res.category.list;
       
-      console.log(this.categoryList);
       // 首次加载
       this.categoryItemClick(this.categoryList[0],0)
     },
@@ -63,7 +62,6 @@ export default {
 
         const { data:res } = await getCategoryInfo(item.maitKey);
         this.categoryItemList = res.list;
-        console.log(this.categoryItemList);
       }
     }
 }
